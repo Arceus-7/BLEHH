@@ -1,0 +1,13 @@
+; nested loops - two deep, because one wasnt confusing enough [just like your girl]
+; output: "1f"
+
+O
+B
+(
+  (B)
+  L
+  L
+  B
+  B
+)
+O

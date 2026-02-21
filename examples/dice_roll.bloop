@@ -1,0 +1,10 @@
+; dice roll - keep rolling the die in a loop
+; run with: bloop -max 200 examples/dice_roll.bloop
+; output: "1bd3" then "d3" repeating until step limit
+
+(
+  O
+  P
+  O
+  B
+)

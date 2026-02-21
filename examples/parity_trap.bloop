@@ -1,0 +1,4 @@
+; parity trap - you think you know what this prints?
+; output: "d3"
+
+BBOPOP

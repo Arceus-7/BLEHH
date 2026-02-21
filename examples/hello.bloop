@@ -1,0 +1,7 @@
+; hello.bloop - a demo of every command
+; output: "1b3d5f"
+
+; print all 6 faces by zigzagging between odd and even
+; uses bump, bridge, lower, output, and loops
+
+OPOBPOBOBPOPO

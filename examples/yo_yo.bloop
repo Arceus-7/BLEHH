@@ -1,0 +1,7 @@
+; yo-yo - a loop that exits faster than you expect [much like you with your girl]
+; output: "1f"
+
+O
+B
+(L)
+O

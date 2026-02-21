@@ -1,0 +1,9 @@
+; the trap - this is an infinite loop! [much like your relationship with your girl]
+; run with: bloop -max 100 examples/the_trap.bloop
+; output: "1" then hangs forever
+
+O
+(B)
+
+; you will never reach this line
+O
