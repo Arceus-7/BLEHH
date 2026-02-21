@@ -1,5 +1,9 @@
 # BLOOP
 
+<p align="center">
+  <img src="images.jpeg" alt="BLOOP Logo" width="200">
+</p>
+
 ## An Esoteric Programming Language
 
 ### v1.0 — Official Language Specification
