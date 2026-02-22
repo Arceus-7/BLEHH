@@ -76,7 +76,7 @@ Never gonna tell a lie and hurt you`
 // wrap applies a delta to the accumulator and keeps the result in [1, 6].
 //
 // Formula:  ((acc - 1 + delta) % 6 + 6) % 6 + 1
-//
+// This is almost like working in the group (Z_6, +)
 // The inner  (acc-1+delta)  maps the 1-based value into 0-based space,
 // the double-mod-plus-6 handles negative remainders (Go's % can be negative),
 // and the final +1 maps back to 1-based.
@@ -394,7 +394,7 @@ func main() {
 		default:
 			comment = "are you running this on a potato?"
 		}
-		fmt.Fprintf(os.Stderr, "\n⏱️  %v — %s\n", elapsed, comment)
+		fmt.Fprintf(os.Stderr, "\n⏱  %v — %s\n", elapsed, comment)
 	}
 
 	// ── Nice. Easter Egg ───────────────────────────────────────────────
