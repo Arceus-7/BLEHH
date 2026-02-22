@@ -1,7 +1,7 @@
 # BLOOP
 
 <p align="center">
-  <img src="images.jpeg" alt="BLOOP Logo" width="200">
+  <img src="logo.jpeg" alt="BLOOP Logo" width="200">
 </p>
 
 ## An Esoteric Programming Language
