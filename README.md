@@ -235,7 +235,7 @@ The `examples/` folder contains several programs to explore:
 
 ---
 
-> *The die has 6 faces. This interpreter has 9 secrets.*
+> *The die has 6 faces. This interpreter has 10 secrets.*
 > *Start looking where there's nothing to find.*
 
 BLOOP v1.0  •  An esoteric language spec  •  5 commands, infinite frustration

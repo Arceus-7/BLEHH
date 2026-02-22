@@ -15,6 +15,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"time"
 )
 
 // ─── Default configuration ──────────────────────────────────────────────────
@@ -264,6 +265,7 @@ Usage:
   bloop -existential ...      Enable existential commentary
   bloop -rick                 You know what this does
   bloop -blame                It's not a bug
+  bloop -speedrun ...         Race the die
 
 Examples:
   bloop examples/hello.bloop
@@ -282,6 +284,7 @@ func main() {
 	maxSteps := 0 // will use default
 	code := ""
 	existential := false
+	speedrun := false
 
 	// Simple argument parser — handles -c, -max, flags, or a file path.
 	for i := 0; i < len(args); i++ {
@@ -318,6 +321,9 @@ func main() {
 			// 🎵 You know the rules, and so do I.
 			fmt.Println(rickRoll)
 			os.Exit(0)
+
+		case "-speedrun":
+			speedrun = true
 
 		case "-blame":
 			fmt.Println("It's not a bug, it's a BLOOP.")
@@ -360,10 +366,36 @@ func main() {
 	}
 
 	// Run the interpreter.
+	start := time.Now()
 	output, err := interpret(code, maxSteps, existential)
+	elapsed := time.Since(start)
 
 	// Print any accumulated output from O commands.
 	fmt.Print(output)
+
+	// ── Speedrun Timer Easter Egg ──────────────────────────────────────
+	if speedrun {
+		us := elapsed.Microseconds()
+		ms := elapsed.Milliseconds()
+		var comment string
+		switch {
+		case us < 100:
+			comment = "ohh your girl would be disappointed with how fast you finished"
+		case us < 1000:
+			comment = "blink and you missed it"
+		case ms < 10:
+			comment = "faster than your wifi"
+		case ms < 100:
+			comment = "not bad, not bad"
+		case ms == 420:
+			comment = "nice."
+		case ms < 1000:
+			comment = "the die took a scenic route"
+		default:
+			comment = "are you running this on a potato?"
+		}
+		fmt.Fprintf(os.Stderr, "\n⏱️  %v — %s\n", elapsed, comment)
+	}
 
 	// ── Nice. Easter Egg ───────────────────────────────────────────────
 	if output == "69" || output == "420" {
