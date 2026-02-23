@@ -1,18 +1,18 @@
-# BLOOP
+# BLEHH
 
 <p align="center">
-  <img src="logo.jpeg" alt="BLOOP Logo" width="200">
+  <img src="logo.jpeg" alt="BLEHH Logo" width="200">
 </p>
 
 ## An Esoteric Programming Language
 
 ### v1.0 — Official Language Specification
 
-## 1. What is BLOOP?
+## 1. What is BLEHH?
 
-BLOOP is a minimalist esoteric programming language. It has exactly 5 commands. It operates on a single value called the accumulator, which is always a dice face — a number between 1 and 6. That's it. There is no memory, no variables, no functions, no types.
+BLEHH is a minimalist esoteric programming language. It has exactly 5 commands. It operates on a single value called the accumulator, which is always a dice face — a number between 1 and 6. That's it. There is no memory, no variables, no functions, no types.
 
-The twist that makes BLOOP fun and weird: every command behaves differently depending on whether the current accumulator value is ODD (1, 3, 5) or EVEN (2, 4, 6). The same program can produce wildly different results depending on where you start. This is called the Parity Twist.
+The twist that makes BLEHH fun and weird: every command behaves differently depending on whether the current accumulator value is ODD (1, 3, 5) or EVEN (2, 4, 6). The same program can produce wildly different results depending on where you start. This is called the Parity Twist.
 
 ## 2. Design Philosophy
 
@@ -20,12 +20,12 @@ The twist that makes BLOOP fun and weird: every command behaves differently depe
 - Single accumulator. No tape, no stack, no registers.
 - Values live between 1 and 6 only (wrapping enforced).
 - Parity changes everything. Odd and even values behave differently.
-- File extension: `.bloop`
+- File extension: `.blehh`
 - Any character that is not a command is silently ignored (use this for comments!).
 
 ## 3. The Accumulator
 
-The accumulator is the one and only piece of state in a BLOOP program. It starts at 1 at the beginning of every program. It can only ever hold values from 1 to 6 (inclusive). If an operation would take it below 1 it wraps to 6, and if it would go above 6 it wraps to 1.
+The accumulator is the one and only piece of state in a BLEHH program. It starts at 1 at the beginning of every program. It can only ever hold values from 1 to 6 (inclusive). If an operation would take it below 1 it wraps to 6, and if it would go above 6 it wraps to 1.
 
 Examples of wrapping:
 
@@ -36,7 +36,7 @@ Examples of wrapping:
 
 ## 4. Command Reference
 
-BLOOP has exactly 5 commands:
+BLEHH has exactly 5 commands:
 
 | Command | Value is ODD (1, 3, 5) | Value is EVEN (2, 4, 6) |
 |---------|------------------------|--------------------------|
@@ -71,7 +71,7 @@ Prints the current accumulator value. HOW it prints depends on parity.
 - Odd  → prints the number itself      e.g. acc=1 prints: 1
 - Even → prints the letter at that position in the alphabet: 2→B, 4→D, 6→F
 
-This means BLOOP programs output a mix of digits (1, 3, 5) and letters (B, D, F) depending on accumulator parity. The alphabet mapping keeps output readable while preserving the parity twist!
+This means BLEHH programs output a mix of digits (1, 3, 5) and letters (B, D, F) depending on accumulator parity. The alphabet mapping keeps output readable while preserving the parity twist!
 
 ### P — Parity Bridge
 
@@ -143,7 +143,7 @@ Hmm! Parity shifted mid-way. This is the trap. Let's try again:
 B L B O   -- experiment to find the right path to 3
 ```
 
-This is the puzzle of BLOOP — parity shifts as you move, so planning ahead is essential.
+This is the puzzle of BLEHH — parity shifts as you move, so planning ahead is essential.
 
 ### Infinite loop (careful!)
 
@@ -159,17 +159,17 @@ B B P O   -- bump twice, then reset, then print
 
 ## 9. Implementation Notes
 
-For anyone building a BLOOP interpreter, here's the minimum you need:
+For anyone building a BLEHH interpreter, here's the minimum you need:
 
 - State: a single integer initialized to 1, constrained to [1, 6].
 - Parser: read characters one at a time, skip anything not in {B, L, O, P, (, )}.
 - Loop handling: track loop start positions with a stack. On (, push current position. On ), check exit condition based on parity at loop entry (store this when pushing).
 - Parity check: (acc % 2 !== 0) = odd, (acc % 2 === 0) = even.
 - Wrapping: ((acc - 1 + delta) % 6) + 1 for positive delta, with similar modular arithmetic for negative.
-- File extension: `.bloop`
+- File extension: `.blehh`
 - Encoding: UTF-8 plain text.
 
-No standard library. No imports. No nothing. Just BLOOP.
+No standard library. No imports. No nothing. Just BLEHH.
 
 ## 10. Getting Started
 
@@ -181,22 +181,22 @@ No standard library. No imports. No nothing. Just BLOOP.
 
 ```bash
 git clone <repo-url>
-cd bloop
-go build -o bloop .
+cd BLEHH
+go build -o BLEHH .
 ```
 
-On Windows this produces `bloop.exe`.
+On Windows this produces `BLEHH.exe`.
 
-### Run a .bloop file
+### Run a .blehh file
 
 ```bash
-./bloop examples/hello.bloop
+./BLEHH examples/hello.blehh
 ```
 
 ### Run inline code
 
 ```bash
-./bloop -c "OBOBO"
+./BLEHH -c "OBOBO"
 ```
 
 ### Set a step limit
@@ -204,7 +204,7 @@ On Windows this produces `bloop.exe`.
 Protect against infinite loops by capping the number of steps:
 
 ```bash
-./bloop -max 500 examples/the_trap.bloop
+./BLEHH -max 500 examples/the_trap.blehh
 ```
 
 The default limit is 1,000,000 steps. If exceeded, the interpreter prints a warning to stderr and exits.
@@ -215,27 +215,27 @@ The `examples/` folder contains several programs to explore:
 
 | File | What it does |
 |------|-------------|
-| `hello.bloop` | Exercises all 5 commands |
-| `count_all_faces.bloop` | Tries to print every dice face 1–6 |
-| `parity_trap.bloop` | Guess the output — you'll be wrong |
-| `roller_coaster.bloop` | Rides the accumulator up and down |
-| `yo_yo.bloop` | A loop that exits faster than you expect |
-| `staircase.bloop` | Discovers the one-way parity door |
-| `odd_forever.bloop` | Proof that odd is a one-move lifespan |
-| `nested_loops.bloop` | Nested loops with independent exits |
-| `the_trap.bloop` | Deliberately infinite — use `-max`! |
-| `dice_roll.bloop` | Even-face cycle: 2 → 4 → 6 → 2 → ... |
+| `hello.blehh` | Exercises all 5 commands |
+| `count_all_faces.blehh` | Tries to print every dice face 1–6 |
+| `parity_trap.blehh` | Guess the output — you'll be wrong |
+| `roller_coaster.blehh` | Rides the accumulator up and down |
+| `yo_yo.blehh` | A loop that exits faster than you expect |
+| `staircase.blehh` | Discovers the one-way parity door |
+| `odd_forever.blehh` | Proof that odd is a one-move lifespan |
+| `nested_loops.blehh` | Nested loops with independent exits |
+| `the_trap.blehh` | Deliberately infinite — use `-max`! |
+| `dice_roll.blehh` | Even-face cycle: 2 → 4 → 6 → 2 → ... |
 
 ### Writing your own
 
-1. Create a file with the `.bloop` extension
+1. Create a file with the `.blehh` extension
 2. Write using only the 5 commands: `B`, `L`, `O`, `P`, `(`, `)`
 3. Everything else is ignored — use it for comments, but avoid uppercase B, L, O, P and parentheses in comment text
-4. Run it: `./bloop myprogram.bloop`
+4. Run it: `./BLEHH myprogram.blehh`
 
 ---
 
 > *The die has 6 faces. This interpreter has 10 secrets.*
 > *Start looking where there's nothing to find.*
 
-BLOOP v1.0  •  An esoteric language spec  •  5 commands, infinite frustration
+BLEHH v1.0  •  An esoteric language spec  •  5 commands, infinite frustration

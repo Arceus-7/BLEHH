@@ -1,5 +1,5 @@
 ; dice roll - keep rolling the die in a loop
-; run with: bloop -max 200 examples/dice_roll.bloop
+; run with: BLEHH -max 200 examples/dice_roll.blehh
 ; output: "1bd3" then "d3" repeating until step limit
 
 (

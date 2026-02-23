@@ -1,7 +1,7 @@
 // =============================================================================
-// BLOOP Interpreter — A clean Go implementation of the BLOOP esoteric language.
+// BLEHH Interpreter — A clean Go implementation of the BLEHH esoteric language.
 //
-// BLOOP has a single integer accumulator (init = 1, constrained to [1, 6]).
+// BLEHH has a single integer accumulator (init = 1, constrained to [1, 6]).
 // Commands: B, L, O, P, (, )
 // All other characters are silently ignored.
 // =============================================================================
@@ -28,7 +28,7 @@ var snarkyMessages = []string{
 	"The die judges you silently.",
 	"Was that supposed to do something?",
 	"Even the accumulator is confused.",
-	"BLOOP disapproves.",
+	"BLEHH disapproves.",
 	"That's not how dice work, but ok.",
 	"Your code has the energy of a wet sock.",
 	"The die has seen better programs.",
@@ -49,10 +49,10 @@ var stepLimitMessages = []string{
 var zenKoans = []string{
 	"The unrolled die contains all faces.",
 	"In emptiness, the accumulator finds peace.",
-	"To BLOOP nothing is to BLOOP everything.",
+	"To BLEHH nothing is to BLEHH everything.",
 	"The blank program has already finished. Have you?",
 	"No commands, no bugs. Perfection.",
-	"The wisest BLOOP program is the one never written.",
+	"The wisest BLEHH program is the one never written.",
 }
 
 var existentialSuffixes = []string{
@@ -104,7 +104,7 @@ type loopEntry struct {
 
 // ─── Interpreter ────────────────────────────────────────────────────────────
 
-// interpret executes a BLOOP program and returns its collected output.
+// interpret executes a BLEHH program and returns its collected output.
 // maxSteps limits the total number of command-steps to guard against infinite
 // loops; pass 0 to use the default limit.
 // existential enables existential commentary mode.
@@ -257,20 +257,20 @@ func interpret(code string, maxSteps int, existential bool) (string, error) {
 // ─── CLI ────────────────────────────────────────────────────────────────────
 
 func usage() {
-	fmt.Fprintf(os.Stderr, `BLOOP Interpreter
+	fmt.Fprintf(os.Stderr, `BLEHH Interpreter
 Usage:
-  bloop <file.bloop>          Run a .bloop file
-  bloop -c "BLOOP code"       Run inline BLOOP code
-  bloop -max <N> ...          Set step limit (default %d)
-  bloop -existential ...      Enable existential commentary
-  bloop -rick                 You know what this does
-  bloop -blame                It's not a bug
-  bloop -speedrun ...         Race the die
+  BLEHH <file.blehh>          Run a .blehh file
+  BLEHH -c "BLEHH code"       Run inline BLEHH code
+  BLEHH -max <N> ...          Set step limit (default %d)
+  BLEHH -existential ...      Enable existential commentary
+  BLEHH -rick                 You know what this does
+  BLEHH -blame                It's not a bug
+  BLEHH -speedrun ...         Race the die
 
 Examples:
-  bloop examples/hello.bloop
-  bloop -c "BBOOO"
-  bloop -max 500000 examples/hello.bloop
+  BLEHH examples/hello.blehh
+  BLEHH -c "BBOOO"
+  BLEHH -max 500000 examples/hello.blehh
 `, defaultMaxSteps)
 }
 
@@ -326,15 +326,15 @@ func main() {
 			speedrun = true
 
 		case "-blame":
-			fmt.Println("It's not a bug, it's a BLOOP.")
+			fmt.Println("It's not a bug, it's a BLEHH.")
 			os.Exit(0)
 
 		default:
 			// Treat as a file path.
 			path := args[i]
 			ext := strings.ToLower(filepath.Ext(path))
-			if ext != ".bloop" {
-				fmt.Fprintf(os.Stderr, "warning: file %q does not have a .bloop extension\n", path)
+			if ext != ".blehh" {
+				fmt.Fprintf(os.Stderr, "warning: file %q does not have a .blehh extension\n", path)
 			}
 			data, err := os.ReadFile(path)
 			if err != nil {
@@ -346,21 +346,21 @@ func main() {
 	}
 
 	// ── Empty File Zen Koan Easter Egg ─────────────────────────────────
-	// Check if the code has any BLOOP commands at all.
-	hasBloopCmd := false
+	// Check if the code has any BLEHH commands at all.
+	hasBLEHHCmd := false
 	for _, ch := range code {
 		if ch == 'B' || ch == 'L' || ch == 'O' || ch == 'P' || ch == '(' || ch == ')' || ch == '!' {
-			hasBloopCmd = true
+			hasBLEHHCmd = true
 			break
 		}
 	}
-	if code != "" && !hasBloopCmd {
+	if code != "" && !hasBLEHHCmd {
 		// File exists but contains no commands — serve a zen koan.
 		fmt.Println(zenKoans[rand.Intn(len(zenKoans))])
 		os.Exit(0)
 	}
 	if code == "" {
-		fmt.Fprintln(os.Stderr, "error: no BLOOP code provided")
+		fmt.Fprintln(os.Stderr, "error: no BLEHH code provided")
 		usage()
 		os.Exit(1)
 	}
