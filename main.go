@@ -4,6 +4,8 @@
 // BLEHH has a single integer accumulator (init = 1, constrained to [1, 6]).
 // Commands: B, L, O, P, (, )
 // All other characters are silently ignored.
+//
+// I built this esoteric language interpreter because my gf has not replied since 2 hours so I had to do something fun
 // =============================================================================
 
 package main
@@ -80,6 +82,8 @@ Never gonna tell a lie and hurt you`
 // The inner  (acc-1+delta)  maps the 1-based value into 0-based space,
 // the double-mod-plus-6 handles negative remainders (Go's % can be negative),
 // and the final +1 maps back to 1-based.
+//
+// i nutted so hard figuring out this modular arithmetic that my keyboard is still sticky.
 func wrap(acc, delta int) int {
 	return ((acc-1+delta)%6+6)%6 + 1
 }
@@ -120,10 +124,10 @@ func interpret(code string, maxSteps int, existential bool) (string, error) {
 		fmt.Fprintln(os.Stderr, "🕹️  +30 lives! Step limit doubled.")
 	}
 
-	acc := 1   // accumulator — always in [1, 6], starts at 1
-	ip := 0    // instruction pointer — current position in code
-	steps := 0 // total command steps executed so far
-	var stack []loopEntry
+	acc := 1              // accumulator — always in [1, 6], starts at 1
+	ip := 0               // instruction pointer — current position in code
+	steps := 0            // total steps; each one is a bad decision made at 2am
+	var stack []loopEntry // call stack. yes it's a stack. yes i'm compensating for something.
 	var out strings.Builder
 
 	for ip < len(code) {
@@ -159,6 +163,7 @@ func interpret(code string, maxSteps int, existential bool) (string, error) {
 			displayAcc := acc
 			// ── The Liar Easter Egg ──────────────────────────────────
 			// 1 in 100 chance that O prints the wrong value (off by 1)
+			// basically the same odds as your code working on the first try. enjoy.
 			if rand.Intn(100) == 0 {
 				if rand.Intn(2) == 0 {
 					displayAcc = wrap(acc, 1)
@@ -206,7 +211,7 @@ func interpret(code string, maxSteps int, existential bool) (string, error) {
 		// If the condition IS met, pop and continue.
 		case ')':
 			if len(stack) == 0 {
-				// Unmatched ')' — silently ignore (defensive).
+				// unmatched ')'. it showed up without a partner, horny and alone. we've all been there.
 				ip++
 				continue
 			}
@@ -366,6 +371,8 @@ func main() {
 	}
 
 	// Run the interpreter.
+	// strapping in. fingers crossed. this is the part where the computer either does exactly what you want or
+	// obliterates your dignity in front of the entire terminal. no safe word available.
 	start := time.Now()
 	output, err := interpret(code, maxSteps, existential)
 	elapsed := time.Since(start)

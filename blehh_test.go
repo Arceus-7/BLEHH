@@ -165,6 +165,8 @@ func TestPCommand(t *testing.T) {
 }
 
 // ─── Loop tests ─────────────────────────────────────────────────────────────
+// loops are just the CPU repeatedly asking "are we there yet?"
+// and the accumulator going "not yet baby keep going" until the exit condition is met.
 
 func TestLoopOddEntry(t *testing.T) {
 	// acc=1 (odd). Enter loop, enteredOdd=true.
@@ -216,7 +218,8 @@ func TestLoopRepeats(t *testing.T) {
 	}
 }
 
-// ─── Non-command characters are ignored ─────────────────────────────────────
+// ─── Non-command characters are ignored ───────────────────────────────────────
+// any character that isn't B, L, O, P, (, or ) gets silently swallowed(something your mom does every night)
 
 func TestIgnoredCharacters(t *testing.T) {
 	// "O" with extra noise around it should just print "1".
@@ -263,6 +266,9 @@ func TestMultipleOutputs(t *testing.T) {
 }
 
 // ─── Empty program ─────────────────────────────────────────────────────────
+// an empty string walks into the interpreter. the interpreter looks at it.
+// nothing happens. no output. no error. just two consenting adults staring at each other in total silence.
+// the most erotic test in this entire file.
 
 func TestEmptyProgram(t *testing.T) {
 	out, err := interpret("", 0, false)
